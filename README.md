@@ -1,18 +1,18 @@
 # ALCO_Project_1
 Homework for Assembled Language and Computer Organization  Project One
 
-# Project Goal
+## Project Goal
 可以將輸入的一段 RISC-V 組合語言的 code 轉換成對應的 Machine Code
 
 Input : 一段RISC-V組語的code
 
 Output : 對應的machine code
 
-# Project Method
+## Project Method
 透過讀檔，將RISC-V Type種類讀入程式中。
 先比對輸入 Name 對應的 Type ，並將其 Type 讀入剩下參數。
 
-# How to Use?
+## How to Use?
 Input : 
 ```
 add x2,x2,x23
