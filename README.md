@@ -19,7 +19,7 @@ Output : 對應的machine code
 
 
 ## How to Use?
-Sample Input : 
+Sample Input : (輸入 `exit` 表示輸入完成)
 ```
 add x2,x2,x23
 addi x24,x24,2
@@ -32,7 +32,7 @@ L1:
 exit
 ```
 
-Ssample Output :
+Sample Output :
 ```
 0000000 10111 00010 000 00010 0110011
 0000000000010 11000 000 11000 0010011
@@ -42,12 +42,14 @@ Ssample Output :
 0000000 00001 00010 011 00000 0100011
 ```
 
-## 程式碼
+## Code Explain
 
 ```c++
-#include<iostream>
-#include<string>
-#include<vector>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <sstream>
 using namespace std;
 ```
 `include<iostream>`  用來在Terminal輸入輸出
@@ -59,3 +61,149 @@ using namespace std;
 `include<fstream>`  讀取檔案
 
 `include<sstream>`  分割string用
+
+---
+
+```c++
+struct Opcode
+{
+	string type;
+	string name;
+	string opcode;
+	string funct3;
+	string funct7;
+};
+```
+
+是讀檔完，並將對應的instruction放到此struct。
+
+---
+
+```c++
+struct labelPos
+{
+	string name;
+	string pos;
+};
+```
+
+是用來儲存Label所在的行數。
+
+---
+
+```c++
+vector<Opcode> instruction;			// 存入各種type 指令
+vector<string> implement;			// 儲存使用者輸入的指令
+string input;					// input handler
+```
+
+宣告變數儲存，並且呼叫 `addinstruction(instruction)` 讀入type 和對應的opcode, etc.
+
+```c++
+string type;
+
+//開檔
+ifstream inFile("instruction.csv", ios::in);
+
+//檢查檔案是否存在
+if (!inFile)
+{
+  cerr << "File not found" << endl;
+  exit(0);
+}
+
+//如果可以讀到檔案，用逗點分割Type
+while (getline(inFile, type, ','))
+{
+  Opcode tmp;
+  tmp.type = type;
+
+  //用逗點分割Name
+  getline(inFile, tmp.name, ',');
+
+  if (type == "UJ-type")
+  {
+    getline(inFile, tmp.opcode, '\n');
+  }
+  else
+  {
+    getline(inFile, tmp.opcode, ',');
+
+    //對應道不同Type有不同funct需要輸入
+    if (type == "R-type" || type == "I-typeM")
+    {
+      getline(inFile, tmp.funct3, ',');
+      getline(inFile, tmp.funct7, '\n');
+    }
+    else if (type == "I-type" || type == "S-type" || type == "I-typeNum" || type == "B-type")
+    {
+      getline(inFile, tmp.funct3, '\n');
+    }
+  }
+
+  //將剛剛建立好的type存入instruction中
+  instruction.push_back(tmp);
+}
+
+//關檔
+inFile.close();
+```
+
+---
+
+```c++
+```
+
+```c++
+while (true)
+{
+  //從 Terminal 輸入 Instruction
+  getline(cin, input);
+
+  //若輸入exit，表示結束輸入
+  if (input != "exit")
+  {
+    //存放輸入的指令
+    implement.push_back(input);		
+  }
+  else
+  {
+    break;
+  }
+}
+```
+---
+
+接著要判斷輸入的instruction中，是否有label
+有 :arrow_right: 要記錄 Label 所在行數
+
+```c++
+string tmp;
+labelPos can_find;
+
+for (int i = 0; i < input.size(); ++i)
+{
+  if (input[i].find(':') != string::npos)
+  {
+    // 清除前一個使用的string
+    tmp.clear();
+
+    // 將找到label 的行數儲存
+    for (int j = 0; input[i][j] != ':'; ++j)
+    {
+      tmp += input[i][j];
+    }
+
+    can_find.name = tmp;
+    // 所在行數轉成 二進位
+    can_find.pos = decimal_to_binary(to_string(i + 1), 12);
+
+    label.push_back(can_find);
+  }
+}
+```
+
+---
+
+```c++
+```
