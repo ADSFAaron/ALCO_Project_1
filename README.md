@@ -175,6 +175,7 @@ while (true)
 ---
 
 接著要判斷輸入的instruction中，是否有label
+
 有 :arrow_right: 要記錄 Label 所在行數
 
 ```c++
@@ -205,5 +206,65 @@ for (int i = 0; i < input.size(); ++i)
 
 ---
 
+接著將 instruction 指令全部 轉成 Machine code。
+
+這邊取R-type 和 B-type 舉例
+
 ```c++
+void R_type(Opcode& find, string& rd, string& rs1, string& rs2)
+{
+	//印出result
+	cout << find.funct7 << " " << decimal_to_binary(rs2) << " " << decimal_to_binary(rs1) << " "
+		<< find.funct3 << " " << decimal_to_binary(rd) << " " << find.opcode << endl;
+}
+
+void B_type(Opcode& findOp, string& rs1, string& rs2, string& offset)
+{
+	//label 處理
+	string simm;
+
+	//避免找不到label，整個程式crash
+	bool exist = false;
+
+	for (int i = 0; i < label.size(); ++i)
+	{
+		//找出對應的Label
+		if (offset == label[i].name)
+		{
+			simm = label[i].pos;
+			exist = true;
+			break;
+		}
+	}
+	
+	//並且輸出
+	if (exist)
+	{
+		for (int i = 5; i < 10; ++i)
+		{
+			cout << simm[i];
+		}
+
+		cout << simm[11] << " ";
+	}
+	else
+	{
+		cout << "==============Error================\n Can't Find Label" << endl;
+	}
+
+	cout << decimal_to_binary(rs2) << " " << decimal_to_binary(rs1) << " " << findOp.funct3 << " ";
+
+	if (exist)
+	{
+		for (int i = 0; i < 5; ++i)
+		{
+			cout << simm[i];
+		}
+
+		cout << simm[10] << " ";
+	}
+
+	cout << findOp.opcode << endl;
+}
 ```
+
