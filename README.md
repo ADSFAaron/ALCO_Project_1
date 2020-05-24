@@ -8,6 +8,10 @@ Input : 一段RISC-V組語的code
 
 Output : 對應的machine code
 
+## Requirement
+
+:page_facing_up: 檔案需放在同個資料夾。
+
 ## Project Method
 透過讀檔，將RISC-V Type種類讀入程式中。
 
@@ -150,9 +154,6 @@ inFile.close();
 ```
 
 ---
-
-```c++
-```
 
 ```c++
 while (true)
