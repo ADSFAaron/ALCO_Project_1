@@ -79,7 +79,7 @@ struct Opcode
 };
 ```
 
-是讀檔完，並將對應的instruction放到此struct。
+建立struct，並將對應的instruction放到此struct。
 
 ---
 
@@ -101,7 +101,7 @@ vector<string> implement;			// 儲存使用者輸入的指令
 string input;					// input handler
 ```
 
-宣告變數儲存，並且呼叫 `addinstruction()` function 讀入 type 和對應的 opcode, etc.
+呼叫 `addinstruction()` function 來儲存 type 和對應的 name, opcode, funct3, funct7
 
 ```c++
 string type;
