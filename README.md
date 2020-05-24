@@ -101,7 +101,7 @@ vector<string> implement;			// 儲存使用者輸入的指令
 string input;					// input handler
 ```
 
-宣告變數儲存，並且呼叫 `addinstruction(instruction)` 讀入type 和對應的opcode, etc.
+宣告變數儲存，並且呼叫 `addinstruction()` function 讀入 type 和對應的 opcode, etc.
 
 ```c++
 string type;
