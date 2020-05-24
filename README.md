@@ -10,8 +10,11 @@ Output : 對應的machine code
 
 ## Project Method
 透過讀檔，將RISC-V Type種類讀入程式中。
+
 並先將Label所在的行數先存入`vector<string> LABEL` 
-先比對輸入 Name 對應的 Type ，並將其 Type 讀入剩下參數，並轉換輸出opcode、funct7、 funct3
+
+先比對輸入 Name 對應的 Type ，並將其 Type 讀入剩下參數，並轉換輸出 opcode、funct7、 funct3
+
 之後將剩下的register轉換成二進位，印出結果。
 
 
@@ -38,3 +41,20 @@ Ssample Output :
 000100 00000 00000 000 000000 1100011
 0000000 00001 00010 011 00000 0100011
 ```
+
+## 程式碼
+
+```c++
+#include<iostream>
+#include<string>
+#include<vector>
+#include<bitset>
+using namespace std;
+```
+`include<iostream>`  用來在Terminal輸入輸出
+
+`include<string>`  用來使用string的 operator[]、find 等功能
+
+`include<vector>`  用來在Terminal輸入輸出
+
+`include<fstream>`  用來在Terminal輸入輸出
