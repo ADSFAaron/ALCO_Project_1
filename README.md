@@ -10,10 +10,13 @@ Output : 對應的machine code
 
 ## Project Method
 透過讀檔，將RISC-V Type種類讀入程式中。
-先比對輸入 Name 對應的 Type ，並將其 Type 讀入剩下參數。
+並先將Label所在的行數先存入`vector<string> LABEL` 
+先比對輸入 Name 對應的 Type ，並將其 Type 讀入剩下參數，並轉換輸出opcode、funct7、 funct3
+之後將剩下的register轉換成二進位，印出結果。
+
 
 ## How to Use?
-Input : 
+Sample Input : 
 ```
 add x2,x2,x23
 addi x24,x24,2
@@ -26,7 +29,7 @@ L1:
 exit
 ```
 
-Output :
+Ssample Output :
 ```
 0000000 10111 00010 000 00010 0110011
 0000000000010 11000 000 11000 0010011
