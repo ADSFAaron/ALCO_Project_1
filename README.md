@@ -48,13 +48,14 @@ Ssample Output :
 #include<iostream>
 #include<string>
 #include<vector>
-#include<bitset>
 using namespace std;
 ```
 `include<iostream>`  用來在Terminal輸入輸出
 
 `include<string>`  用來使用string的 operator[]、find 等功能
 
-`include<vector>`  用來在Terminal輸入輸出
+`include<vector>`  儲存所有Opreator 和輸入的Instruction的空間
 
-`include<fstream>`  用來在Terminal輸入輸出
+`include<fstream>`  讀取檔案
+
+`include<sstream>`  分割string用
